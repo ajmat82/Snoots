@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "composio": {
+      "type": "sse",
+      "url": "https://mcp.composio.dev/googleads/ck_9nsZY4q90EpXNOoWZLku"
+    }
+  }
+}
