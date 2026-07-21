@@ -1,0 +1,787 @@
+
+<title>Snoots — Meta Ads Strategy vs. BondVet</title>
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --bg:        #F7F6F2;
+    --surface:   #FFFFFF;
+    --border:    #E2DED8;
+    --text:      #1A2530;
+    --text-2:    #5C5852;
+    --text-3:    #8C897F;
+    --accent:    #E04F2A;      /* Snoots warm coral — energy, urgency */
+    --accent-2:  #2A7A5C;      /* deep sage — Snoots positive/mission */
+    --bond:      #4A6FA5;      /* BondVet blue — distinct from Snoots */
+    --bond-bg:   #EEF2F8;
+    --snoots-bg: #EEF6F0;
+    --tag-bg:    #F0EDE7;
+    --shadow:    0 1px 3px rgba(26,37,48,.08), 0 4px 12px rgba(26,37,48,.05);
+    --radius:    10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:        #141B22;
+      --surface:   #1E2832;
+      --border:    #2C3540;
+      --text:      #E8E4DC;
+      --text-2:    #A09A90;
+      --text-3:    #65605A;
+      --accent:    #F06840;
+      --accent-2:  #3DA070;
+      --bond:      #6A8FC5;
+      --bond-bg:   #1B2535;
+      --snoots-bg: #162820;
+      --tag-bg:    #252C34;
+      --shadow:    0 1px 3px rgba(0,0,0,.3), 0 4px 12px rgba(0,0,0,.2);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg:#F7F6F2;--surface:#FFFFFF;--border:#E2DED8;--text:#1A2530;
+    --text-2:#5C5852;--text-3:#8C897F;--accent:#E04F2A;--accent-2:#2A7A5C;
+    --bond:#4A6FA5;--bond-bg:#EEF2F8;--snoots-bg:#EEF6F0;--tag-bg:#F0EDE7;
+    --shadow:0 1px 3px rgba(26,37,48,.08),0 4px 12px rgba(26,37,48,.05);
+  }
+  :root[data-theme="dark"] {
+    --bg:#141B22;--surface:#1E2832;--border:#2C3540;--text:#E8E4DC;
+    --text-2:#A09A90;--text-3:#65605A;--accent:#F06840;--accent-2:#3DA070;
+    --bond:#6A8FC5;--bond-bg:#1B2535;--snoots-bg:#162820;--tag-bg:#252C34;
+    --shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* ── HEADER ── */
+  .doc-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 48px;
+  }
+  .doc-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .doc-title {
+    font-size: clamp(24px,4vw,36px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 10px;
+  }
+  .doc-sub {
+    color: var(--text-2);
+    font-size: 14px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section { margin-bottom: 48px; }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-label h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── ANGLES GRID ── */
+  .angles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .angle-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .angle-card.bond { border-left: 3px solid var(--bond); }
+  .angle-card-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--bond);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .angle-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .angle-card p {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .angle-card blockquote {
+    font-size: 12.5px;
+    font-style: italic;
+    color: var(--text-3);
+    border-left: 2px solid var(--border);
+    padding-left: 10px;
+    margin-top: 8px;
+  }
+
+  /* ── COMPARE TABLE ── */
+  .compare-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    font-size: 13.5px;
+  }
+  thead tr { background: var(--tag-bg); }
+  thead th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    border-bottom: 1px solid var(--border);
+  }
+  thead th.bond-h { color: var(--bond); }
+  thead th.snoots-h { color: var(--accent-2); }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td {
+    padding: 11px 16px;
+    vertical-align: top;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  tbody td:first-child { color: var(--text-3); font-weight: 600; font-size: 12.5px; width: 28%; }
+  tbody td.bond-cell { color: var(--bond); background: var(--bond-bg); }
+  tbody td.snoots-cell { color: var(--accent-2); background: var(--snoots-bg); }
+  .win-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .win-snoots { background: var(--snoots-bg); color: var(--accent-2); }
+  .win-bond   { background: var(--bond-bg); color: var(--bond); }
+
+  /* ── INSIGHT BOX ── */
+  .insight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+  }
+  .insight-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .insight p { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+  /* ── AD CONCEPTS ── */
+  .ad-concepts { display: flex; flex-direction: column; gap: 24px; }
+  .ad-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .ad-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ad-badge {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--tag-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+  }
+  .ad-meta { flex: 1; }
+  .ad-concept-num {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+  .ad-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.25;
+    margin-bottom: 4px;
+    text-wrap: balance;
+  }
+  .ad-angle-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-3);
+    background: var(--tag-bg);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+  .ad-body { padding: 20px 22px; }
+  .ad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 580px) { .ad-grid { grid-template-columns: 1fr; } }
+  .ad-section-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 8px;
+  }
+  .ad-copy {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.65;
+    white-space: pre-line;
+  }
+  .ad-copy strong { color: var(--text); font-weight: 700; }
+  .ad-visual {
+    background: var(--tag-bg);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+  .ad-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 22px 18px;
+    border-top: 1px solid var(--border);
+    align-items: center;
+  }
+  .ad-footer-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-right: 4px;
+  }
+  .pill {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--tag-bg);
+    color: var(--text-2);
+  }
+  .pill.accent { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
+  .pill.green  { background: color-mix(in srgb, var(--accent-2) 12%, transparent); color: var(--accent-2); }
+
+  /* ── STRATEGY BOX ── */
+  .strategy-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 26px;
+    box-shadow: var(--shadow);
+  }
+  .strategy-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .strategy-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .strategy-list li {
+    font-size: 13.5px;
+    color: var(--text-2);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .strategy-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .strategy-list li strong { color: var(--text); font-weight: 600; }
+</style>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div class="doc-eyebrow">Competitive Intelligence · Meta Ads Strategy</div>
+    <h1 class="doc-title">Snoots vs. BondVet — Where to Win in NJ</h1>
+    <p class="doc-sub">Analysis of BondVet's active ad angles · Positioning gap assessment · New Meta ad concepts for Snoots US launch</p>
+  </header>
+
+
+  <!-- SECTION 1: BONDVET ANGLES -->
+  <section class="section">
+    <div class="section-label"><h2>BondVet's Active Ad Angles</h2></div>
+    <div class="angles-grid">
+
+      <div class="angle-card bond">
+        <div class="angle-card-num">Angle 01</div>
+        <h3>$0 First Exam — Remove the Barrier</h3>
+        <p>Their highest-spend angle. A discount to acquire new patients and get them through the door. Running Nov 2025–Aug 2026.</p>
+        <blockquote>"New to Bond Vet? Enjoy a $0 exam fee on your first visit!"</blockquote>
+      </div>
+
+      <div class="angle-card bond">
+        <div class="angle-card-num">Angle 02</div>
+        <h3>Convenience — Open 7 Days, Walk-In Welcome</h3>
+        <p>Targets the "I need a vet NOW" moment. Positions against traditional practices with week-long waits.</p>
+        <blockquote>"Need a vet ASAP? Bond Vet is open 7 days a week."</blockquote>
+      </div>
+
+      <div class="angle-card bond">
+        <div class="angle-card-num">Angle 03</div>
+        <h3>One-Stop Care: Primary + Urgent</h3>
+        <p>Positions as the only vet you need — bridges the gap between a booked-out GP vet and an expensive ER.</p>
+        <blockquote>"Routine checkups, urgent care &amp; everything in between."</blockquote>
+      </div>
+
+      <div class="angle-card bond">
+        <div class="angle-card-num">Angle 04</div>
+        <h3>Membership — Predictable Costs</h3>
+        <p>Launched April 2026. 1 free exam/year, 20% off future exams, priority teletriage. "Founding Member" urgency window.</p>
+        <blockquote>"Expanding access and improving pet health outcomes."</blockquote>
+      </div>
+
+      <div class="angle-card bond">
+        <div class="angle-card-num">Angle 05</div>
+        <h3>Community / Rescue Mission</h3>
+        <p>Partnership with Animal Care Centers of NYC — $1,000 credit for adoptable pets. Brand warmth and adoption-barrier removal.</p>
+        <blockquote>"Helping remove financial barriers to adoption."</blockquote>
+      </div>
+
+      <div class="angle-card bond">
+        <div class="angle-card-num">Angle 06</div>
+        <h3>Scale = Trust ("1M Pet Visits")</h3>
+        <p>Social proof at scale. Market-leader positioning. Used as credibility anchor in prospecting and retargeting.</p>
+        <blockquote>"Bond Vet Surpasses One Million Pet Visits."</blockquote>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SECTION 2: HEAD-TO-HEAD -->
+  <section class="section">
+    <div class="section-label"><h2>Head-to-Head Positioning</h2></div>
+
+    <div class="compare-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th class="bond-h">BondVet</th>
+            <th class="snoots-h">Snoots</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Business model</td>
+            <td class="bond-cell">Fee-for-service + optional membership layer</td>
+            <td class="snoots-cell">Membership IS the model — no per-visit billing ever <span class="win-tag win-snoots">Snoots wins</span></td>
+          </tr>
+          <tr>
+            <td>Primary conversion hook</td>
+            <td class="bond-cell">Convenience — "open now, walk in"</td>
+            <td class="snoots-cell">Financial predictability — "one flat price, come as often as you want"</td>
+          </tr>
+          <tr>
+            <td>Price transparency</td>
+            <td class="bond-cell">Transparent pricing, but still per-visit billing</td>
+            <td class="snoots-cell">$55/month, all-inclusive, no copays, no surprise bills <span class="win-tag win-snoots">Snoots wins</span></td>
+          </tr>
+          <tr>
+            <td>Pre-existing conditions</td>
+            <td class="bond-cell">Standard exclusions apply</td>
+            <td class="snoots-cell">No exclusions for pre-existing conditions <span class="win-tag win-snoots">Snoots wins</span></td>
+          </tr>
+          <tr>
+            <td>Urgent care</td>
+            <td class="bond-cell">Core service pillar — same-day, walk-in urgent care <span class="win-tag win-bond">BondVet wins</span></td>
+            <td class="snoots-cell">Primary/preventive only; recommend pairing with accident insurance</td>
+          </tr>
+          <tr>
+            <td>Scale &amp; credibility</td>
+            <td class="bond-cell">55 clinics, 1M+ visits, post-merger network <span class="win-tag win-bond">BondVet wins</span></td>
+            <td class="snoots-cell">1 US location; strong UK track record (6 clinics, 4.9★, 8K pets)</td>
+          </tr>
+          <tr>
+            <td>Mission narrative</td>
+            <td class="bond-cell">"Empathy and ease" — hospitality-forward care</td>
+            <td class="snoots-cell">"End financial euthanasia" — structural change, not just better service <span class="win-tag win-snoots">Snoots wins</span></td>
+          </tr>
+          <tr>
+            <td>Dental &amp; spay/neuter</td>
+            <td class="bond-cell">Available, billed separately</td>
+            <td class="snoots-cell">Included in membership — huge perceived value <span class="win-tag win-snoots">Snoots wins</span></td>
+          </tr>
+          <tr>
+            <td>Pet insurance comparison</td>
+            <td class="bond-cell">Not positioned against insurance</td>
+            <td class="snoots-cell">Explicitly positioned as insurance alternative/replacement <span class="win-tag win-snoots">Snoots wins</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight" style="margin-top:20px;">
+      <div class="insight-label">Strategic Gap</div>
+      <p>BondVet's newest angle — their April 2026 membership launch — is the one space where they're moving toward your model. But their membership is an <em>add-on</em> (20% off, 1 free exam) on top of continued per-visit billing. Snoots' model is categorically different: unlimited everything, no marginal cost per visit. That gap is your entire positioning. Own it before BondVet learns to explain it.</p>
+    </div>
+  </section>
+
+
+  <!-- SECTION 3: AD CONCEPTS -->
+  <section class="section">
+    <div class="section-label"><h2>New Meta Ad Concepts for Snoots</h2></div>
+    <div class="ad-concepts">
+
+
+      <!-- AD 1 -->
+      <div class="ad-card">
+        <div class="ad-card-header">
+          <div class="ad-badge">🧾</div>
+          <div class="ad-meta">
+            <div class="ad-concept-num">Concept 01</div>
+            <div class="ad-title">The Receipt Scroll</div>
+            <span class="ad-angle-tag">Sticker shock → relief</span>
+          </div>
+        </div>
+        <div class="ad-body">
+          <div class="ad-grid">
+            <div>
+              <div class="ad-section-label">Primary Copy</div>
+              <div class="ad-copy"><strong>Last year, my dog cost me $3,200 in vet bills.</strong>
+
+That's: $180 exam. $400 bloodwork. $850 dental. $620 antibiotics. $1,100 "unexpected visit."
+
+This year she's on Snoots.
+
+That's everything above — plus all her vaccines, unlimited visits, and a 24/7 vet line. For $55/month.
+
+One flat bill. No copays. No "let me tell you what today will cost before we start."
+
+<strong>Founding member pricing ends August 1st.</strong></div>
+            </div>
+            <div>
+              <div class="ad-section-label">Visual Direction</div>
+              <div class="ad-visual">Static or short video. Open on a phone scrolling a long vet bill itemization — each line animating in. Then a hard cut to a clean card: "Snoots. $55/month. All of this, included." End with a pet snuggled up. Warm light. No clinical setting.</div>
+              <div style="margin-top:12px;">
+                <div class="ad-section-label">Headline (Link)</div>
+                <div class="ad-copy" style="font-size:13px;">"We do everything on that list. Every month. For one flat price."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-footer">
+          <span class="ad-footer-label">Best for</span>
+          <span class="pill">Prospecting — cold audience</span>
+          <span class="pill accent">Feed + Reels</span>
+          <span class="pill">Dog owners, 28–45, NJ</span>
+          <span class="pill green">Founding member CTA</span>
+        </div>
+      </div>
+
+
+      <!-- AD 2 -->
+      <div class="ad-card">
+        <div class="ad-card-header">
+          <div class="ad-badge">🐾</div>
+          <div class="ad-meta">
+            <div class="ad-concept-num">Concept 02</div>
+            <div class="ad-title">The "Just Check" Problem</div>
+            <span class="ad-angle-tag">Behavior change — removes avoidance</span>
+          </div>
+        </div>
+        <div class="ad-body">
+          <div class="ad-grid">
+            <div>
+              <div class="ad-section-label">Primary Copy</div>
+              <div class="ad-copy">"It's probably nothing."
+
+That's what you tell yourself when your dog's limping a little, or your cat's been drinking more water than usual.
+
+Because going to the vet means a $200 visit just to hear "he's fine."
+
+At Snoots, you've already paid. So you go. You just… go.
+
+<strong>Unlimited visits. $55/month.</strong> No copay. No guilt. No waiting to see if it gets worse.
+
+Your pet's been trying to tell you something. Now you can actually listen.</div>
+            </div>
+            <div>
+              <div class="ad-section-label">Visual Direction</div>
+              <div class="ad-visual">Short video. Pet owner at home noticing something small — dog limping, cat not eating. Cut to same owner at Snoots, relaxed, smiling. Vet looking calm, pet happy. Text overlay: "No copay. Just come in." No over-produced clinic shots — feels like a real visit.</div>
+              <div style="margin-top:12px;">
+                <div class="ad-section-label">Headline (Link)</div>
+                <div class="ad-copy" style="font-size:13px;">"Stop waiting to see if it gets worse."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-footer">
+          <span class="ad-footer-label">Best for</span>
+          <span class="pill">Prospecting — anxious pet owners</span>
+          <span class="pill accent">Reels / Stories</span>
+          <span class="pill">Cat + dog owners, NJ radius</span>
+        </div>
+      </div>
+
+
+      <!-- AD 3 -->
+      <div class="ad-card">
+        <div class="ad-card-header">
+          <div class="ad-badge">🔄</div>
+          <div class="ad-meta">
+            <div class="ad-concept-num">Concept 03</div>
+            <div class="ad-title">Insurance Comparison — Direct Takedown</div>
+            <span class="ad-angle-tag">Category disruption</span>
+          </div>
+        </div>
+        <div class="ad-body">
+          <div class="ad-grid">
+            <div>
+              <div class="ad-section-label">Primary Copy</div>
+              <div class="ad-copy">Pet insurance: $85/month + a $500 deductible + a claims form + 2–4 weeks to get reimbursed + exclusions for anything that existed before you signed up.
+
+Snoots: $55/month. Come in whenever. No forms. No deductible. No exclusions — even for pre-existing conditions.
+
+It's not insurance. It's a vet that's already paid for.
+
+<strong>One clinic. One price. Unlimited care.</strong>
+
+Now open in Clifton, NJ. Founding member pricing through August 1st.</div>
+            </div>
+            <div>
+              <div class="ad-section-label">Visual Direction</div>
+              <div class="ad-visual">Split-screen static or carousel. Left side: red/complex — insurance claim form, fine print, waiting. Right side: clean/warm — Snoots clinic, happy pet, single price point. Works well as a 3-slide carousel with: (1) insurance pain, (2) Snoots model, (3) CTA + location.</div>
+              <div style="margin-top:12px;">
+                <div class="ad-section-label">Headline (Link)</div>
+                <div class="ad-copy" style="font-size:13px;">"Cancel your pet insurance. Join Snoots."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-footer">
+          <span class="ad-footer-label">Best for</span>
+          <span class="pill">Prospecting — existing pet insurance holders</span>
+          <span class="pill accent">Feed carousel</span>
+          <span class="pill green">Interest: pet insurance, Nationwide, Trupanion</span>
+        </div>
+      </div>
+
+
+      <!-- AD 4 -->
+      <div class="ad-card">
+        <div class="ad-card-header">
+          <div class="ad-badge">📍</div>
+          <div class="ad-meta">
+            <div class="ad-concept-num">Concept 04</div>
+            <div class="ad-title">New to NJ — Local Launch Moment</div>
+            <span class="ad-angle-tag">Launch urgency + local identity</span>
+          </div>
+        </div>
+        <div class="ad-body">
+          <div class="ad-grid">
+            <div>
+              <div class="ad-section-label">Primary Copy</div>
+              <div class="ad-copy">North Jersey's pets finally have a vet that makes sense.
+
+In London, 8,000+ pets are members. 4.9 stars. Unlimited bloodwork, vaccines, dental, and visits — one flat monthly fee.
+
+This month, we opened in Clifton, NJ.
+
+<strong>Founding members get 25% off for the first year.</strong> That's $41/month for unlimited care — before your neighbors hear about it.
+
+Join Snoots →</div>
+            </div>
+            <div>
+              <div class="ad-section-label">Visual Direction</div>
+              <div class="ad-visual">Local feel — NJ imagery in the background, Clifton/Bergen County visual cues. Feature real pets or UGC-style selfie shots at the clinic. The "founding member" scarcity is key here. Short video works well: someone opening the Snoots app, booking their first appointment, arriving at the clinic. End card with address.</div>
+              <div style="margin-top:12px;">
+                <div class="ad-section-label">Headline (Link)</div>
+                <div class="ad-copy" style="font-size:13px;">"Clifton's newest vet is unlike any vet you've been to."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-footer">
+          <span class="ad-footer-label">Best for</span>
+          <span class="pill">Geo-targeted prospecting — 15mi radius, Clifton</span>
+          <span class="pill accent">Feed + Stories</span>
+          <span class="pill green">Time-sensitive: before Aug 1</span>
+        </div>
+      </div>
+
+
+      <!-- AD 5 -->
+      <div class="ad-card">
+        <div class="ad-card-header">
+          <div class="ad-badge">🐶</div>
+          <div class="ad-meta">
+            <div class="ad-concept-num">Concept 05</div>
+            <div class="ad-title">New Puppy / Kitten Owner Intercept</div>
+            <span class="ad-angle-tag">Life-stage targeting</span>
+          </div>
+        </div>
+        <div class="ad-body">
+          <div class="ad-grid">
+            <div>
+              <div class="ad-section-label">Primary Copy</div>
+              <div class="ad-copy">The first year with a puppy involves a LOT of vet visits.
+
+First wellness check. Second wellness check. All their puppy vaccines. Spay or neuter. The time they ate something weird. The skin thing.
+
+That's $1,500–$2,500 the traditional way.
+
+On Snoots, it's $55/month. Come in for every single one of those. No copay. No bill at the end.
+
+<strong>New puppy? This is exactly what Snoots is for.</strong>
+
+Join at founding member pricing → ends August 1st.</div>
+            </div>
+            <div>
+              <div class="ad-section-label">Visual Direction</div>
+              <div class="ad-visual">Puppy/kitten content performs. Use a genuinely adorable new pet video or owner-submitted UGC. Overlay the copy as text on screen in Reels format. The contrast of "chaos of new pet ownership" vs. "simple monthly fee" is the emotional beat. Works as both prospecting and as a retargeting asset for anyone who visited the new puppy landing page.</div>
+              <div style="margin-top:12px;">
+                <div class="ad-section-label">Headline (Link)</div>
+                <div class="ad-copy" style="font-size:13px;">"New puppy? Don't let vet bills surprise you."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-footer">
+          <span class="ad-footer-label">Best for</span>
+          <span class="pill">Prospecting — new pet owners</span>
+          <span class="pill accent">Reels</span>
+          <span class="pill">Interest: new puppy, dog training, puppy food</span>
+          <span class="pill green">Retarget: puppy landing page visitors</span>
+        </div>
+      </div>
+
+
+      <!-- AD 6 -->
+      <div class="ad-card">
+        <div class="ad-card-header">
+          <div class="ad-badge">💬</div>
+          <div class="ad-meta">
+            <div class="ad-concept-num">Concept 06</div>
+            <div class="ad-title">Testimonial — The Chronic Condition Owner</div>
+            <span class="ad-angle-tag">Social proof — high-frequency user</span>
+          </div>
+        </div>
+        <div class="ad-body">
+          <div class="ad-grid">
+            <div>
+              <div class="ad-section-label">Primary Copy</div>
+              <div class="ad-copy">"My dog has Cushing's disease. Before Snoots, I was spending £300 every month just on blood tests to monitor him.
+
+Now I pay £49/month and come in as often as I need. The vet knows him. He's happier. I'm not dreading the bill every time I walk in."
+
+— Snoots member, London
+
+<strong>Unlimited bloodwork. Unlimited visits. One price.</strong>
+
+Opening in Clifton, NJ this month. Founding member pricing ends August 1st.</div>
+            </div>
+            <div>
+              <div class="ad-section-label">Visual Direction</div>
+              <div class="ad-visual">Pull a real UK member testimonial (with permission) and convert to US context. Written-quote-over-photo format works well on Feed. Alternatively, a short UGC-style video of a real member talking to camera — no production, just authenticity. The chronic condition angle specifically targets the segment most underserved by insurance (which excludes pre-existing conditions).</div>
+              <div style="margin-top:12px;">
+                <div class="ad-section-label">Headline (Link)</div>
+                <div class="ad-copy" style="font-size:13px;">"My dog has a chronic condition. Snoots changed everything."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-footer">
+          <span class="ad-footer-label">Best for</span>
+          <span class="pill">Prospecting + retargeting</span>
+          <span class="pill accent">Feed static / short video</span>
+          <span class="pill">Interest: pet health conditions, Cushing's, diabetes in pets</span>
+          <span class="pill green">High-LTV segment</span>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <!-- SECTION 4: STRATEGY NOTES -->
+  <section class="section">
+    <div class="section-label"><h2>Campaign Strategy Notes</h2></div>
+    <div class="strategy-box">
+      <h3>How to approach these in Meta</h3>
+      <ul class="strategy-list">
+        <li><strong>Run Concepts 01–03 as your top-of-funnel prospecting cluster.</strong> Test all three simultaneously in a single Advantage+ campaign to let Meta's algorithm find which angle resonates in each NJ county. Budget $300–500/week minimum to get meaningful signal.</li>
+        <li><strong>Concept 04 (Local Launch) should run as a separate geo-targeted campaign</strong> with a tight 15-mile radius around Clifton. This is your brand awareness driver with the founding member hook — push it hard before August 1st.</li>
+        <li><strong>Concepts 05 and 06 are retargeting and interest-layered prospecting.</strong> Concept 05 can target "new puppy" interest clusters; Concept 06 works in retargeting against website visitors who didn't convert.</li>
+        <li><strong>BondVet's $0 exam tactic is a cost-of-acquisition play — don't match it.</strong> Your founding member 25% discount is structurally better: it creates 12 months of locked-in LTV, not a one-time trial. Lean into that framing.</li>
+        <li><strong>Don't avoid the word "unlimited" — it's your moat.</strong> BondVet can't say it. Insurance can't say it. Make it the most repeated word in your creative.</li>
+        <li><strong>The insurance-comparison angle (Concept 03) is your sharpest knife</strong> but also the one most likely to get flagged for policy. Test it early, keep claims specific and substantiated, and have a softened version ready.</li>
+        <li><strong>Video will outperform static in NJ launch phase.</strong> Even low-production UGC-style content shot at the Clifton clinic will build more trust than polished brand imagery right now. Real pets, real space, real team.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
