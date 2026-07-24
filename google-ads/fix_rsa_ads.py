@@ -125,6 +125,36 @@ HL_FIXES = {
     "All Diagnostics Included — from $55/Mo": "All Diagnostics from $55/Mo",
     "Imaging & Bloodwork — No Extra Cost":  "Imaging & Bloodwork Included",
     "All Routine Care — One Monthly Fee":   "All Routine Care, One Fee",
+
+    # ── punctuation fixes: periods used as sentence separators in headlines ──
+    # Google policy prohibits periods/full-stops as sentence terminators in headlines.
+    "No Copays. No Surprise Bills.":        "No Copays, No Surprise Bills",
+    "Unlimited Visits. One Low Fee.":       "Unlimited Visits, One Low Fee",
+    "One Flat Fee. Unlimited Visits":       "One Flat Fee, Unlimited Visits",
+    "No Surprise Vet Bills. Ever.":         "No Surprise Vet Bills - Ever",
+    "Skip Insurance. Join Snoots.":         "Skip Insurance, Join Snoots",
+    "4.9-Star Rated. 8,000+ Pets":          "4.9-Star Rated, 8,000+ Pets",
+    "Cancel Anytime. No Lock-In.":          "Cancel Anytime, No Lock-In",
+    "Join Snoots. Book Online Now.":        "Join Snoots - Book Online Now",
+    "No Surprise Bills. One Flat Fe":       "No Surprise Bills, Flat Fee",
+    "Top Rated Vet. 8,000+ Pets":           "Top Rated Vet, 8,000+ Pets",
+    "$55/Mo. Everything Included.":         "$55/Mo - Everything Included",
+    "No Invoices. No Copays. Ever.":        "No Invoices, No Copays, Ever",
+    "Pay Once. Come in Any Time.":          "Pay Once, Come in Any Time",
+    "No Per-Visit Fees. Ever.":             "No Per-Visit Fees - Ever",
+    "Cancel Anytime. No Commitment.":       "Cancel Anytime, No Commitment",
+    "Skip the Claims. Join Snoots.":        "Skip the Claims, Join Snoots",
+    "No Copays. Unlimited Visits.":         "No Copays, Unlimited Visits",
+    "Flat-Fee Vet. Minutes Away.":          "Flat-Fee Vet, Minutes Away",
+    "No Copays for Your Dog. Ever.":        "No Copays for Your Dog - Ever",
+    "No Copays for Your Cat. Ever.":        "No Copays for Your Cat - Ever",
+    "Unlimited Procedures. One Fee.":       "Unlimited Procedures, One Fee",
+    "A Better Alt. to Pet Insurance":       "A Better Alt to Pet Insurance",
+    "No Copays or Deductibles. Ever":       "No Copays or Deductibles Ever",
+    "Skip Pet Insurance. Try Snoots":       "Skip Pet Insurance, Try Snoots",
+    "Pet Insurance vs. Snoots":             "Pet Insurance vs Snoots",
+    "Compare Snoots vs. Insurance":         "Compare Snoots vs Insurance",
+    "New Puppy? Start with Snoots.":        "New Puppy? Start with Snoots",
 }
 
 # Per-ad corrected descriptions (≤90 chars each)
