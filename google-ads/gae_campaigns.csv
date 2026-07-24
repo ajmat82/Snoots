@@ -1,4 +1,4 @@
-Campaign,Campaign Daily Budget,Campaign Type,Campaign Status,Bid Strategy Type,Networks,Languages
+Campaign,Budget,Campaign Type,Campaign Status,Bid Strategy Type,Networks,Languages
 Search_Brand_Snoots_MaxConv,25,Search,Paused,Maximize conversions,Google Search,English
 Search_NB_UnlimitedVet_MaxConv,60,Search,Paused,Maximize conversions,Google Search,English
 Search_NB_PetInsuranceAlt_MaxConv,40,Search,Paused,Maximize conversions,Google Search,English
