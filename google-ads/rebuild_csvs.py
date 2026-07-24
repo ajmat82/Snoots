@@ -43,7 +43,7 @@ with open("gae_campaigns.csv", "w", newline="", encoding="utf-8") as f:
             "Bid strategy type": "Maximize conversions",
             "Networks": "Google Search",
             "Languages": "English",
-            "EU political ads": "Not a political ad",
+            "EU political ads": "No",
         })
 print(f"gae_campaigns.csv          → {len(campaigns)} rows")
 
