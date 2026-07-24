@@ -1,7 +1,7 @@
-Campaign,Budget,Campaign Type,Campaign Status,Bid Strategy Type,Networks,Languages
-Search_Brand_Snoots_MaxConv,25,Search,Paused,Maximize conversions,Google Search,English
-Search_NB_UnlimitedVet_MaxConv,60,Search,Paused,Maximize conversions,Google Search,English
-Search_NB_PetInsuranceAlt_MaxConv,40,Search,Paused,Maximize conversions,Google Search,English
-Search_NB_LocalNJ_MaxConv,50,Search,Paused,Maximize conversions,Google Search,English
-Search_NB_PetSpecific_MaxConv,30,Search,Paused,Maximize conversions,Google Search,English
-Search_NB_ProcedureIntent_MaxConv,40,Search,Paused,Maximize conversions,Google Search,English
+Campaign,Budget,Campaign Type,Campaign Status,Bid Strategy Type,Networks,Languages,EU political ads
+Search_Brand_Snoots_MaxConv,25,Search,Paused,Maximize conversions,Google Search,English,Not a political ad
+Search_NB_UnlimitedVet_MaxConv,60,Search,Paused,Maximize conversions,Google Search,English,Not a political ad
+Search_NB_PetInsuranceAlt_MaxConv,40,Search,Paused,Maximize conversions,Google Search,English,Not a political ad
+Search_NB_LocalNJ_MaxConv,50,Search,Paused,Maximize conversions,Google Search,English,Not a political ad
+Search_NB_PetSpecific_MaxConv,30,Search,Paused,Maximize conversions,Google Search,English,Not a political ad
+Search_NB_ProcedureIntent_MaxConv,40,Search,Paused,Maximize conversions,Google Search,English,Not a political ad
