@@ -1,0 +1,7 @@
+Row Type,Action,Campaign,Budget,Campaign type,Campaign status,Bid strategy type,Networks,Languages,EU political ads
+Campaign,Add,Search_Brand_Snoots_MaxConv,25,Search,Paused,Maximize conversions,Google Search,English,No
+Campaign,Add,Search_NB_UnlimitedVet_MaxConv,60,Search,Paused,Maximize conversions,Google Search,English,No
+Campaign,Add,Search_NB_PetInsuranceAlt_MaxConv,40,Search,Paused,Maximize conversions,Google Search,English,No
+Campaign,Add,Search_NB_LocalNJ_MaxConv,50,Search,Paused,Maximize conversions,Google Search,English,No
+Campaign,Add,Search_NB_PetSpecific_MaxConv,30,Search,Paused,Maximize conversions,Google Search,English,No
+Campaign,Add,Search_NB_ProcedureIntent_MaxConv,40,Search,Paused,Maximize conversions,Google Search,English,No
