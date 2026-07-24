@@ -257,9 +257,26 @@ AD_DESCRIPTIONS = {
     ],
 }
 
-# Per-ad path overrides (max 15 chars each)
+# Per-ad path overrides (max 15 chars each).
+# Path 1 / Path 2 are display-only suffixes appended to the auto-detected domain.
+# Do NOT include the domain here — Google pulls that from Final URL automatically.
 PATH_FIXES = {
-    "Search_NB_PetInsuranceAlt_MaxConv": ("joinsnoots.com", "No-Insurance"),
+    "Search_Brand_SnootesBrand_MaxConv":    ("Vet-Membership", "Join"),
+    "Search_NB_UnlimitedVetCare_MaxConv":   ("Unlimited-Vet",  "Members"),
+    "Search_NB_AffordableVet_MaxConv":      ("Affordable-Vet", "Members"),
+    "Search_NB_CostAnxiety_MaxConv":        ("Affordable-Vet", "Members"),
+    "Search_NB_Concierge_MaxConv":          ("Vet-Membership", "Members"),
+    "Search_NB_PetInsuranceAlt_MaxConv":    ("No-Insurance",   "Members"),
+    "Search_NB_InsuranceResearch_MaxConv":  ("vs-Insurance",   "Members"),
+    "Search_NB_VetNearMe_MaxConv":          ("Vet-Near-Me",    "NJ"),
+    "Search_NB_VetCliftonNJ_MaxConv":       ("Clifton-NJ",     "Vet"),
+    "Search_NB_HyperLocal_MaxConv":         ("Near-You",       "NJ"),
+    "Search_NB_DogVet_MaxConv":             ("Dog-Vet",        "Members"),
+    "Search_NB_CatVet_MaxConv":             ("Cat-Vet",        "Members"),
+    "Search_NB_LifeStage_MaxConv":          ("New-Pet",        "Members"),
+    "Search_NB_Vaccinations_MaxConv":       ("Vaccines",       "Members"),
+    "Search_NB_WellnessExam_MaxConv":       ("Wellness",       "Members"),
+    "Search_NB_Procedures_MaxConv":         ("Whats-Included", "Members"),
 }
 
 def fix_headline(h):
@@ -303,7 +320,7 @@ with open("gae_rsa_ads.csv", "w", newline="", encoding="utf-8") as f:
             "Ad type": "Responsive search ad",
             "Path 1": p1,
             "Path 2": p2,
-            "Final URL": r["Final URL"],
+            "Final URL": "https://joinsnoots.com",
         }
         for c in hl_cols + hl_pos + desc_pos:
             row[c] = r.get(c, "")
